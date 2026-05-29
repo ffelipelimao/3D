@@ -185,50 +185,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7703423336758522442, guid: 9543c8747ede5a84589ebcb498fb4515, type: 3}
   m_PrefabInstance: {fileID: 16216641}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &23339974
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 23339976}
-  - component: {fileID: 23339975}
-  m_Layer: 0
-  m_Name: StateMachine
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &23339975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 23339974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd1eeb3d4e6ec460d83d49147c46c0c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StateMachine
---- !u!4 &23339976
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 23339974}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 108.56943, y: 39.11749, z: 10.00871}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &27757644
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3445,6 +3401,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8391976400090115252, guid: 3e26483ea67bad242b76de0971c6ac09, type: 3}
   m_PrefabInstance: {fileID: 555235760}
   m_PrefabAsset: {fileID: 0}
+--- !u!134 &560076799
+PhysicsMaterial:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 2
+  m_DynamicFriction: 0.6
+  m_StaticFriction: 0.6
+  m_Bounciness: 0
+  m_FrictionCombine: 0
+  m_BounceCombine: 0
 --- !u!1 &608379696
 GameObject:
   m_ObjectHideFlags: 0
@@ -7816,7 +7785,7 @@ CharacterController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1189811763}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 560076799}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -7885,7 +7854,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5668ac35a832743bd988c72b4f64eaa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAbilityShoot
-  gunBase: {fileID: 1692605019472542131, guid: affc7f3c1bf88400792f5434577294b1, type: 3}
+  guns:
+  - {fileID: 1692605019472542131, guid: affc7f3c1bf88400792f5434577294b1, type: 3}
+  - {fileID: 6105610730801436713, guid: edd6f04dfe8a5453f8944250a02312ee, type: 3}
   gunPosition: {fileID: 629731712}
 --- !u!1001 &1196220682
 PrefabInstance:
@@ -16212,7 +16183,6 @@ SceneRoots:
   - {fileID: 1365271113}
   - {fileID: 1393194107}
   - {fileID: 1149129669}
-  - {fileID: 23339976}
   - {fileID: 1558082237}
   - {fileID: 349360040}
   - {fileID: 190383863}
