@@ -9,12 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7855405304396545808}
-  - component: {fileID: 5434390521002302801}
   - component: {fileID: 1356295125507032206}
   - component: {fileID: 1381692387615718342}
+  - component: {fileID: 4548664691628934411}
+  - component: {fileID: 6027659287816874616}
   m_Layer: 0
   m_Name: PFB_Enemy03
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,27 +37,6 @@ Transform:
   - {fileID: 8955670428997815391}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5434390521002302801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6392736514008811622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10400d642d77f4471a51f7c984536755, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
-  startLife: 10
-  _currentLife: 0
-  startAnimationDuration: 0.2
-  startWithAnimation: 1
-  ease: 27
-  _animationBase: {fileID: 1381692387615718342}
-  coll: {fileID: 1356295125507032206}
-  flashColor: {fileID: 5716191353086834128}
-  pSystem: {fileID: 6917725711459188832}
 --- !u!65 &1356295125507032206
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -100,6 +80,59 @@ MonoBehaviour:
   - animationType: 4
     trigger: death
   animator: {fileID: 1042728307095385069}
+--- !u!114 &4548664691628934411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6392736514008811622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20ca1b990f064f00b5ea8a5ab51d0c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyWalk
+  startLife: 10
+  _currentLife: 0
+  startAnimationDuration: 1.4
+  startWithAnimation: 1
+  ease: 27
+  _animationBase: {fileID: 1381692387615718342}
+  coll: {fileID: 1356295125507032206}
+  flashColor: {fileID: 5716191353086834128}
+  pSystem: {fileID: 6917725711459188832}
+  wayPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  minDistance: 1
+  speed: 10
+--- !u!54 &6027659287816874616
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6392736514008811622}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &8565725222823755605
 GameObject:
   m_ObjectHideFlags: 0
@@ -5082,6 +5115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VFXFlashColor
   meshRenderer: {fileID: 7783277967785686832}
+  skinnedMeshRenderer: {fileID: 0}
   color: {r: 1, g: 0, b: 0, a: 1}
   duration: 0.3
 --- !u!4 &8955670428997815391 stripped

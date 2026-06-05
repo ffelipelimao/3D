@@ -49,11 +49,11 @@ public class StateMachine<T> where T : System.Enum
     #endif
 
     */
-    public void SwitchState(T state)
+    public void SwitchState(T state, params object[] objects)
     {
         if (_currentState != null) _currentState.OnStateExit();
         _currentState = dictionaryStates[state];
-        _currentState.OnStateEnter();
+        _currentState.OnStateEnter(objects);
     }
 
     public void Update()

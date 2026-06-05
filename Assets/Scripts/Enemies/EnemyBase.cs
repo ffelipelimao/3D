@@ -13,10 +13,17 @@ public class EnemyBase : MonoBehaviour, IDamageable
     public Collider coll;
     public VFXFlashColor flashColor;
     public ParticleSystem pSystem;
+    public bool LookAtPlayer = false;
+    private Player _player;
 
     void Awake()
     {
         Init();
+    }
+
+    void Start()
+    {
+        _player = GameObject.FindObjectOfType<Player>();
     }
 
     protected virtual void Init()
@@ -46,6 +53,9 @@ public class EnemyBase : MonoBehaviour, IDamageable
     {
         if (flashColor != null) flashColor.Flash();
         if (pSystem != null) pSystem.Emit(15);
+
+        transform.position -= transform.forward;
+
         _currentLife -= f;
         if (_currentLife <= 0)
         {
@@ -63,17 +73,25 @@ public class EnemyBase : MonoBehaviour, IDamageable
         _animationBase.PlayAnimationTrigger(animationType);
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            OnDamage(5f);
-        }
-    }
-
     public void Damage(float damage)
     {
         Debug.Log("Damage");
         OnDamage(damage);
+    }
+
+    public void Damage(float damage, Vector3 direction)
+    {
+        Debug.Log("Damage Direction");
+        OnDamage(damage);
+        transform.DOMove(transform.position - direction, 0.1f);
+    }
+
+    public virtual void Update()
+    {
+        if (LookAtPlayer)
+        {
+            transform.LookAt(_player.transform.position);
+        }
+
     }
 }

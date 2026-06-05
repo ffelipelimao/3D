@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     public CharacterController characterController;
     public Animator anim;
@@ -13,6 +14,8 @@ public class Player : MonoBehaviour
     [Header("Run Setup")]
     public KeyCode keyRun = KeyCode.LeftShift;
     public float speedRun = 1.5f;
+
+    public List<VFXFlashColor> vFXFlashColor;
 
     void Update()
     {
@@ -62,5 +65,24 @@ public class Player : MonoBehaviour
              anim.SetBool("Run", false);
          }
          */
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.GetComponentInParent<EnemyBase>() != null)
+        {
+            Damage(5f);
+        }
+    }
+
+    public void Damage(float damage)
+    {
+        Debug.Log("Player Damage Flash");
+        vFXFlashColor.ForEach(i => i.Flash());
+    }
+
+    public void Damage(float damage, Vector3 direction)
+    {
+        Damage(damage);
     }
 }

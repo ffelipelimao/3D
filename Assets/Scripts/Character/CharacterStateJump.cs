@@ -11,7 +11,7 @@ public class CharacterStateJump : StateBase
         _owner = owner;
     }
 
-    public override void OnStateEnter(object o = null)
+    public override void OnStateEnter(params object[] objects)
     {
         Debug.Log("[Character] Enter JUMP");
 
