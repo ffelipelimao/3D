@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IDamageable
+public class Player : MonoBehaviour
 {
     public CharacterController characterController;
     public Animator anim;
@@ -14,8 +14,23 @@ public class Player : MonoBehaviour, IDamageable
     [Header("Run Setup")]
     public KeyCode keyRun = KeyCode.LeftShift;
     public float speedRun = 1.5f;
-
     public List<VFXFlashColor> vFXFlashColor;
+    public HealthBase healthBase;
+    private bool _isAlive = true;
+    public List<Collider> colliders;
+
+
+    void Awake()
+    {
+        OnValidate();
+        healthBase.OnDamage += Damage;
+        healthBase.OnKill += OnKill;
+    }
+
+    void OnValidate()
+    {
+        if (healthBase == null) healthBase = GetComponent<HealthBase>();
+    }
 
     void Update()
     {
@@ -71,18 +86,48 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (hit.collider.GetComponentInParent<EnemyBase>() != null)
         {
-            Damage(5f);
+            healthBase.Damage(5f);
         }
     }
 
-    public void Damage(float damage)
+    public void Damage(HealthBase healthBase)
     {
         Debug.Log("Player Damage Flash");
         vFXFlashColor.ForEach(i => i.Flash());
     }
 
-    public void Damage(float damage, Vector3 direction)
+    public void OnKill(HealthBase healthBase)
     {
-        Damage(damage);
+        if (_isAlive)
+        {
+            _isAlive = false;
+            anim.SetTrigger("Death");
+            colliders.ForEach(i => i.enabled = false);
+
+            Invoke(nameof(Revive), 3f);
+        }
+    }
+
+    [NaughtyAttributes.Button]
+    public void Respawn()
+    {
+        if (CheckPointManager.Instance.HasCheckpoint())
+        {
+            transform.position = CheckPointManager.Instance.GetPositionFromLastCheckpoint();
+        }
+    }
+
+    public void Revive()
+    {
+        _isAlive = true;
+        healthBase.ResetLife();
+        anim.SetTrigger("Revival");
+        Respawn();
+        Invoke(nameof(TurnOnColliders), 3f);
+    }
+
+    void TurnOnColliders()
+    {
+        colliders.ForEach(i => i.enabled = true);
     }
 }

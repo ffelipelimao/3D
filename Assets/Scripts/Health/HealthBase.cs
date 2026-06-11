@@ -1,8 +1,9 @@
 using UnityEngine;
 using System;
 using Unity.VisualScripting;
+using System.Collections.Generic;
 
-public class HealthBase : MonoBehaviour
+public class HealthBase : MonoBehaviour, IDamageable
 {
     public float startLife = 10f;
     [SerializeField] private float _currentLife;
@@ -10,7 +11,7 @@ public class HealthBase : MonoBehaviour
 
     public Action<HealthBase> OnDamage;
     public Action<HealthBase> OnKill;
-
+    public List<UI> ui;
 
     void Awake()
     {
@@ -22,7 +23,7 @@ public class HealthBase : MonoBehaviour
         ResetLife();
     }
 
-    void ResetLife()
+    public void ResetLife()
     {
         _currentLife = startLife;
     }
@@ -51,7 +52,21 @@ public class HealthBase : MonoBehaviour
             Kill();
         }
 
+        UpdateUI();
         OnDamage?.Invoke(this);
     }
 
+    public void Damage(float damage, Vector3 direction)
+    {
+        Damage(damage);
+    }
+
+    private void UpdateUI()
+    {
+        if (ui != null)
+        {
+            ui.ForEach(i => i.UpdateValue((float)_currentLife / startLife));
+
+        }
+    }
 }

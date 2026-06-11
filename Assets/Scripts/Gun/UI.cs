@@ -2,7 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GunUI : MonoBehaviour
+public class UI : MonoBehaviour
 {
     public Image uiImage;
     private Tween _currentTween;
