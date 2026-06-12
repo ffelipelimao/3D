@@ -2036,6 +2036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9df9e3079868847d3b9cfdc7557ea146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunUI
+  uiType: 1
   uiImage: {fileID: 356566876}
 --- !u!1001 &366469218
 PrefabInstance:
@@ -2368,7 +2369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3395718391368752824, guid: a44e8ba905df7d440abebf2e3e2f9f64, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3395718391368752824, guid: a44e8ba905df7d440abebf2e3e2f9f64, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7669,6 +7670,7 @@ RectTransform:
   m_Children:
   - {fileID: 356566874}
   - {fileID: 1545357241}
+  - {fileID: 2010936470}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -9183,7 +9185,7 @@ Transform:
   m_GameObject: {fileID: 1272403071}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 449.8, y: -7.07, z: 70.79}
+  m_LocalPosition: {x: 446.15, y: -7.07, z: 70.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11257,6 +11259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9df9e3079868847d3b9cfdc7557ea146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GunUI
+  uiType: 0
   uiImage: {fileID: 1545357243}
 --- !u!1 &1552026599
 GameObject:
@@ -15052,6 +15055,101 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8043139984699745673, guid: 6a85956ddea0a304da62a369edd2c2fa, type: 3}
   m_PrefabInstance: {fileID: 1996666715}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2010936469
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2010936470}
+  - component: {fileID: 2010936473}
+  - component: {fileID: 2010936472}
+  - component: {fileID: 2010936471}
+  m_Layer: 5
+  m_Name: UIMessage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2010936470
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010936469}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1102203637}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 200}
+  m_SizeDelta: {x: 1400, y: 160}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2010936471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010936469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 518210a2154284e2c9b8feb92b14eade, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIInGameMessage
+  messageText: {fileID: 2010936472}
+  defaultDuration: 2
+  fadeDuration: 0.3
+--- !u!114 &2010936472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010936469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 72
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: Checkpoint ativo
+--- !u!222 &2010936473
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010936469}
+  m_CullTransparentMesh: 1
 --- !u!1001 &2018836481
 PrefabInstance:
   m_ObjectHideFlags: 0

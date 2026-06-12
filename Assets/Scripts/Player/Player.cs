@@ -104,6 +104,9 @@ public class Player : MonoBehaviour
             anim.SetTrigger("Death");
             colliders.ForEach(i => i.enabled = false);
 
+            if (UIInGameMessage.Instance != null)
+                UIInGameMessage.Instance.ShowMessage("Você morreu!");
+
             Invoke(nameof(Revive), 3f);
         }
     }

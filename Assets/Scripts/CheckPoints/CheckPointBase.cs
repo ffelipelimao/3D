@@ -17,8 +17,14 @@ public class CheckPointBase : MonoBehaviour
 
     void Checkpoint()
     {
+        if (checkpointActive) return;
+        checkpointActive = true;
+
         TurnItOn();
         SaveCheckpoint();
+
+        if (UIInGameMessage.Instance != null)
+            UIInGameMessage.Instance.ShowMessage("Checkpoint ativo");
     }
 
     [NaughtyAttributes.Button]

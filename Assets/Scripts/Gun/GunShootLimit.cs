@@ -69,6 +69,7 @@ public class GunShootLimit : GunBase
 
     void GetAllUI()
     {
-        uis = GameObject.FindObjectsByType<UI>(FindObjectsSortMode.None).ToList();
+        uis = GameObject.FindObjectsByType<UI>(FindObjectsSortMode.None)
+            .Where(i => i.uiType == UIType.Gun).ToList();
     }
 }

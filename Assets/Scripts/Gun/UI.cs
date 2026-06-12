@@ -2,8 +2,15 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum UIType
+{
+    Health,
+    Gun
+}
+
 public class UI : MonoBehaviour
 {
+    public UIType uiType;
     public Image uiImage;
     private Tween _currentTween;
 
