@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     private bool _isAlive = true;
     public List<Collider> colliders;
 
-
     void Awake()
     {
         OnValidate();
@@ -92,8 +91,11 @@ public class Player : MonoBehaviour
 
     public void Damage(HealthBase healthBase)
     {
-        Debug.Log("Player Damage Flash");
         vFXFlashColor.ForEach(i => i.Flash());
+        EffectsManager.Instance.ChangeVignette();
+
+        if (ShakeCamera.Instance != null)
+            ShakeCamera.Instance.Shake(2f, 2f, 0.3f);
     }
 
     public void OnKill(HealthBase healthBase)
