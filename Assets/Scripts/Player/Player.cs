@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Singleton<Player>
 {
     public CharacterController characterController;
     public Animator anim;
@@ -19,11 +19,13 @@ public class Player : MonoBehaviour
     private bool _isAlive = true;
     public List<Collider> colliders;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         OnValidate();
         healthBase.OnDamage += Damage;
         healthBase.OnKill += OnKill;
+
     }
 
     void OnValidate()
@@ -33,6 +35,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (!_isAlive || !characterController.enabled) return;
+
         transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0);
 
         var inputAxisVertical = Input.GetAxis("Vertical");
