@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using Unity.VisualScripting;
 using System.Collections.Generic;
+using System.Collections;
 
 public class HealthBase : MonoBehaviour, IDamageable
 {
@@ -12,6 +13,8 @@ public class HealthBase : MonoBehaviour, IDamageable
     public Action<HealthBase> OnDamage;
     public Action<HealthBase> OnKill;
     public List<UI> ui;
+    public float damageMultiplier = 1f;
+
 
     void Awake()
     {
@@ -47,7 +50,7 @@ public class HealthBase : MonoBehaviour, IDamageable
     {
         //  transform.position -= transform.forward;
 
-        _currentLife -= f;
+        _currentLife -= f * damageMultiplier;
         if (_currentLife <= 0)
         {
             Kill();
@@ -70,4 +73,18 @@ public class HealthBase : MonoBehaviour, IDamageable
 
         }
     }
+
+    public void ChangeDamageMultiply(float duration)
+    {
+        StartCoroutine(ChangeDamageMultiplyCoroutine(damageMultiplier, duration));
+    }
+
+    IEnumerator ChangeDamageMultiplyCoroutine(float damageMultiplier, float duration)
+    {
+
+        this.damageMultiplier = damageMultiplier;
+        yield return new WaitForSeconds(duration);
+        this.damageMultiplier = 1;
+    }
+
 }
