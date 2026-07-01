@@ -21,7 +21,8 @@ public class Player : Singleton<Player>
     private bool _isAlive = true;
     public List<Collider> colliders;
     [SerializeField] private ClothChanger _clothChanger;
-
+    public ParticleSystem dustParticle;
+    public float dustEmissionRate = 5f;
     protected override void Awake()
     {
         base.Awake();
@@ -76,6 +77,10 @@ public class Player : Singleton<Player>
         characterController.Move(speedVector * Time.deltaTime);
 
         anim.SetBool("Run", inputAxisVertical != 0);
+
+        var dustEmission = dustParticle.emission;
+        dustEmission.rateOverDistanceMultiplier =
+            (isWalking && characterController.isGrounded) ? dustEmissionRate : 0f;
 
         /* if (inputAxisVertical != 0)
          {
