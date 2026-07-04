@@ -32,6 +32,14 @@ public class HealthBase : MonoBehaviour, IDamageable
         UpdateUI();
     }
 
+    public float CurrentLife => _currentLife;
+
+    public void SetLife(float life)
+    {
+        _currentLife = Mathf.Clamp(life, 0f, startLife);
+        UpdateUI();
+    }
+
     protected virtual void Kill()
     {
 

@@ -17,7 +17,7 @@ public class ClothItemBase : MonoBehaviour
     public virtual void Collect()
     {
         var setup = ClothManager.Instance.GetClothSetupByType(clothType);
-        Player.Instance.ChangeTexture(setup, duration);
+        Player.Instance.EquipCloth(setup);
         HideObject();
     }
 

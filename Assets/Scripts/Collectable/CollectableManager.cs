@@ -15,6 +15,7 @@ public class CollectableManager : Singleton<CollectableManager>
     void Start()
     {
         Reset();
+        LoadItemsFromSave();
     }
     void Reset()
     {
@@ -22,6 +23,12 @@ public class CollectableManager : Singleton<CollectableManager>
         {
             i.coins.value = 0;
         }
+    }
+
+    void LoadItemsFromSave()
+    {
+        AddByType(CollectableType.COIN, SaveManager.Instance.Setup.coins);
+        AddByType(CollectableType.LIFE_PACK, SaveManager.Instance.Setup.health);
     }
 
     public void AddByType(CollectableType collectableType, int amount = 1)

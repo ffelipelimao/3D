@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using Animation;
+using UnityEngine.Events;
 
 public class EnemyBase : MonoBehaviour, IDamageable
 {
@@ -15,6 +16,8 @@ public class EnemyBase : MonoBehaviour, IDamageable
     public ParticleSystem pSystem;
     public bool LookAtPlayer = false;
     private Player _player;
+
+    public UnityEvent OnKillEvent;
 
     void Awake()
     {
@@ -47,6 +50,7 @@ public class EnemyBase : MonoBehaviour, IDamageable
         if (coll != null) coll.enabled = false;
         Destroy(gameObject, 3f);
         PlayAnimationByTrigger(AnimationType.DEATH);
+        OnKillEvent?.Invoke();
     }
 
     protected virtual void OnDamage(float f)

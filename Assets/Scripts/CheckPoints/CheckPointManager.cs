@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Splines;
 
 public class CheckPointManager : Singleton<CheckPointManager>
 {
@@ -17,6 +16,7 @@ public class CheckPointManager : Singleton<CheckPointManager>
         if (lastCheckpoint < i)
         {
             lastCheckpoint = i;
+            SaveManager.Instance.SaveProgress(lastCheckpoint);
         }
     }
 
@@ -25,5 +25,33 @@ public class CheckPointManager : Singleton<CheckPointManager>
         var checkpoint = checkPointBases.Find(i => i.key == lastCheckpoint);
 
         return checkpoint.transform.position;
+    }
+
+    void Start()
+    {
+        LoadFromSave();
+    }
+
+    void LoadFromSave()
+    {
+        if (SaveManager.Instance == null) return;
+        lastCheckpoint = SaveManager.Instance.Setup.lastCheckpoint;
+        if (!HasCheckpoint()) return;
+
+        if (checkPointBases.Find(c => c.key == lastCheckpoint) == null)
+        {
+            lastCheckpoint = 0;   // save de outra fase / corrompido
+            return;
+        }
+
+        foreach (var checkpoint in checkPointBases)
+        {
+            if (checkpoint.key <= lastCheckpoint) checkpoint.MarkAsActive();
+        }
+
+        Player.Instance.Respawn();
+
+        if (UIInGameMessage.Instance != null)
+            UIInGameMessage.Instance.ShowMessage("Progresso carregado");
     }
 }

@@ -39,6 +39,12 @@ public class CheckPointBase : MonoBehaviour
         meshRenderer.material.SetColor("_EmissionColor", Color.red);
     }
 
+    public void MarkAsActive()
+    {
+        checkpointActive = true;
+        TurnItOn();
+    }
+
     void SaveCheckpoint()
     {
         /*if (PlayerPrefs.GetInt(checkpointKey) < key)

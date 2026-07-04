@@ -21,6 +21,7 @@ public class Player : Singleton<Player>
     private bool _isAlive = true;
     public List<Collider> colliders;
     [SerializeField] private ClothChanger _clothChanger;
+    public int CurrentClothType { get; private set; } = -1;   // -1 = roupa padrao
     public ParticleSystem dustParticle;
     public float dustEmissionRate = 5f;
     protected override void Awake()
@@ -35,6 +36,20 @@ public class Player : Singleton<Player>
     void OnValidate()
     {
         if (healthBase == null) healthBase = GetComponent<HealthBase>();
+    }
+
+    void Start()
+    {
+        LoadFromSave();
+    }
+
+    void LoadFromSave()
+    {
+        if (SaveManager.Instance == null) return;
+        var setup = SaveManager.Instance.Setup;
+        if (setup.playerLife > 0) healthBase.SetLife(setup.playerLife);
+        if (setup.clothType >= 0 && ClothManager.Instance != null)
+            EquipCloth(ClothManager.Instance.GetClothSetupByType((ClothType)setup.clothType));
     }
 
     void Update()
@@ -130,7 +145,9 @@ public class Player : Singleton<Player>
     {
         if (CheckPointManager.Instance.HasCheckpoint())
         {
+            characterController.enabled = false;
             transform.position = CheckPointManager.Instance.GetPositionFromLastCheckpoint();
+            characterController.enabled = true;
         }
     }
 
@@ -161,16 +178,10 @@ public class Player : Singleton<Player>
         speed = defaultSpeed;
     }
 
-    public void ChangeTexture(ClothSetup setup, float duration)
+    public void EquipCloth(ClothSetup setup)   // textura permanente (decisao do usuario)
     {
-        StartCoroutine(ChangeTextureCoroutine(setup, duration));
-    }
-
-    IEnumerator ChangeTextureCoroutine(ClothSetup setup, float duration)
-    {
-
+        if (setup == null) return;
+        CurrentClothType = (int)setup.clothType;
         _clothChanger.ChangeTexture(setup);
-        yield return new WaitForSeconds(duration);
-        _clothChanger.ResetTexture();
     }
 }
