@@ -11,6 +11,8 @@ public class ItemCollectableBase : MonoBehaviour
     [Header("Sound")]
     public AudioSource audioSource;
     public Collider coll;
+    public SFXType SFXType;
+
 
     void OnTriggerEnter(Collider collision)
     {
@@ -21,6 +23,7 @@ public class ItemCollectableBase : MonoBehaviour
     }
     protected virtual void Collect()
     {
+        PlaySFX();
         if (coll != null)
         {
             coll.enabled = false;
@@ -57,5 +60,10 @@ public class ItemCollectableBase : MonoBehaviour
         }
 
         CollectableManager.Instance.AddByType(itemType);
+    }
+
+    void PlaySFX()
+    {
+        SFXPool.Instance.Play(SFXType);
     }
 }

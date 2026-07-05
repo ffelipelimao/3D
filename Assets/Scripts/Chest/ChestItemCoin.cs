@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using DG.Tweening;
-using Mono.Cecil;
 using UnityEngine;
 
 public class ChestItemCoin : ChestItemBase

@@ -12,6 +12,7 @@ public class ChestBase : MonoBehaviour
     public KeyCode keyCode = KeyCode.O;
     private bool _chestOpened = false;
     public ChestItemBase chestItem;
+    public SFXType openSFX = SFXType.CHEST_OPEN;
 
     void Start()
     {
@@ -32,6 +33,10 @@ public class ChestBase : MonoBehaviour
     {
         if (_chestOpened) return;
         animator.SetTrigger(openTrigger);
+        if (SFXPool.Instance != null)
+        {
+            SFXPool.Instance.Play(openSFX);
+        }
         _chestOpened = true;
         Invoke(nameof(DelayedShowItem), 1f);
         Invoke(nameof(CollectedShowItem), 2f);
